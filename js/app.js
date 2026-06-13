@@ -261,7 +261,7 @@ const menuItems = [
     {
         id: "tj5",
         category: "tajines",
-        price: 90,
+        price: 220,
         en: {
             name: "Eel Tajine",
             desc: ""
