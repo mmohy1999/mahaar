@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mahaar Seafood Restaurant - Digital Menu. Experience the finest and freshest ocean delicacies.">
+    <title data-i18n="page-title">Mahaar | Premium Seafood Menu</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cairo:wght@300;400;600;700;800&family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Background Ocean Accents -->
+    <div class="ocean-bg-effect"></div>
+    <div class="ocean-wave-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Left: Language Switcher -->
+            <div class="header-left">
+                <button class="lang-switch-btn" id="lang-switch-btn" aria-label="Switch Language">
+                    <span class="lang-icon">🌐</span>
+                    <span class="lang-label">العربية</span>
+                </button>
+            </div>
+            
+            <!-- Center: Logo and Brand -->
+            <div class="header-center">
+                <div class="logo-area">
+                    <img src="images/logo.png" alt="Mahaar Logo" class="restaurant-logo">
+                    <div class="brand-text">
+                        <span class="brand-name" data-i18n="brand-name">MAHAAR</span>
+                        <span class="brand-sub" data-i18n="brand-sub">SEAFOOD</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Plate Tray -->
+            <div class="header-right">
+                <button class="tray-toggle-btn" id="tray-toggle-btn" aria-label="View selection">
+                    <div class="tray-icon-wrapper">
+                        <span class="badge" id="tray-count">0</span>
+                        <!-- Clam Shell SVG Icon -->
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s-8-4-8-10a8 8 0 0 1 16 0c0 6-8 10-8 10z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 2v4M4 12h4M16 12h4M12 16v4"/>
+                        </svg>
+                    </div>
+                    <span class="btn-text" data-i18n="my-selection">My Plate</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Header Info -->
+    <div class="menu-intro-container">
+        <div class="menu-intro-content">
+            <h1 class="menu-main-title" data-i18n="menu-title">Digital Seafood Menu</h1>
+            <p class="menu-tagline" data-i18n="hero-subtitle">From the Deep Ocean to Your Plate</p>
+            <div class="divider-pearl">
+                <span class="line"></span>
+                <span class="pearl-dot"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Tabs (Sticky) -->
+    <nav class="category-nav" id="category-nav">
+        <div class="category-nav-wrapper">
+            <button class="category-tab active" data-category="all">
+                <span class="tab-text" data-i18n="cat-all">All</span>
+            </button>
+            <button class="category-tab" data-category="sandwiches">
+                <span class="tab-text" data-i18n="cat-sandwiches">Sandwiches</span>
+            </button>
+            <button class="category-tab" data-category="tajines">
+                <span class="tab-text" data-i18n="cat-tajines">Tajines</span>
+            </button>
+            <!--
+            <button class="category-tab" data-category="meals">
+                <span class="tab-text" data-i18n="cat-meals">Meals</span>
+            </button>
+            -->
+            <button class="category-tab" data-category="soups">
+                <span class="tab-text" data-i18n="cat-soups">Soups</span>
+            </button>
+            <button class="category-tab" data-category="salads">
+                <span class="tab-text" data-i18n="cat-salads">Salads</span>
+            </button>
+            <button class="category-tab" data-category="rice-pasta">
+                <span class="tab-text" data-i18n="cat-rice-pasta">Rice & Pasta</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Menu Content -->
+    <main class="menu-container">
+        <div class="categories-wrapper" id="categories-wrapper">
+            <!-- Dynamic content will be injected by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer info -->
+    <footer class="menu-footer">
+        <div class="footer-divider">
+            <span class="pearl-dot"></span>
+        </div>
+        <p class="footer-text">&copy; <span id="current-year">2026</span> <span data-i18n="footer-copyright">Mahaar Seafood Restaurant. All Rights Reserved.</span></p>
+    </footer>
+
+    <!-- Details Modal -->
+    <div class="modal-overlay" id="item-modal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            <div class="modal-body-grid">
+                <div class="modal-image-pane">
+                    <!-- Category cover will represent the item detail background or a nice placeholder -->
+                    <div class="modal-image-bg" id="modal-image-bg"></div>
+                </div>
+                <div class="modal-info-pane">
+                    <div class="modal-header-info">
+                        <h2 id="modal-item-title">Dish Title</h2>
+                        <span class="modal-item-price" id="modal-item-price">0.00 EGP</span>
+                    </div>
+                    <div class="section-divider short"></div>
+                    
+                    <p class="modal-item-desc" id="modal-item-desc">Dish Description goes here.</p>
+                    
+                    <div class="modal-action-row">
+                        <button class="btn-primary" id="modal-add-to-plate-btn">
+                            <span data-i18n="add-to-plate">Add to Plate</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Selection Drawer (My Plate Drawer) -->
+    <div class="drawer-overlay" id="selection-drawer-overlay">
+        <div class="drawer-content" id="selection-drawer">
+            <div class="drawer-header">
+                <h2 data-i18n="my-plate-title">My Selected Dishes</h2>
+                <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Plate">&times;</button>
+            </div>
+            
+            <div class="drawer-body">
+                <div class="drawer-empty-state" id="drawer-empty-state">
+                    <!-- Clam shell visual -->
+                    <div class="empty-shell-icon">🐚</div>
+                    <p data-i18n="plate-empty-msg">Your plate is currently empty. Explore our menu and select your favorite ocean delicacies!</p>
+                </div>
+                
+                <div class="drawer-items-list" id="drawer-items-list">
+                    <!-- Selected items will render here dynamically -->
+                </div>
+            </div>
+            
+            <div class="drawer-footer" id="drawer-footer">
+                <div class="drawer-summary-row">
+                    <span data-i18n="subtotal">Subtotal</span>
+                    <span class="drawer-total-price" id="drawer-total-price">0.00 EGP</span>
+                </div>
+                <p class="drawer-tax-notice" data-i18n="tax-notice">Prices are inclusive of VAT</p>
+                <div class="drawer-actions">
+                    <button class="btn-primary full-width" id="order-submit-btn">
+                        <span class="btn-icon">💬</span>
+                        <span data-i18n="order-via-whatsapp">Send Order via WhatsApp</span>
+                    </button>
+                    <button class="btn-secondary full-width" id="clear-plate-btn" data-i18n="clear-all">Clear All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
