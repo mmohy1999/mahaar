@@ -1278,3 +1278,67 @@ html[dir="rtl"] .modal-tag {
         font-size: 0.85rem;
     }
 }
+
+/* Modal Variants Selection Styling */
+.modal-variants-section {
+    margin-bottom: 2rem;
+}
+
+.variants-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--color-silver-mid);
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.variants-options {
+    display: flex;
+    gap: 15px;
+}
+
+.variant-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border: 1px solid rgba(180, 193, 207, 0.2);
+    border-radius: var(--border-radius-md);
+    background: rgba(180, 193, 207, 0.03);
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--color-silver-light);
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    position: relative;
+    user-select: none;
+}
+
+.variant-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.variant-option:hover {
+    border-color: rgba(180, 193, 207, 0.5);
+    color: #fff;
+    background: rgba(180, 193, 207, 0.06);
+}
+
+.variant-option.active {
+    border-color: var(--color-gold);
+    background: rgba(197, 160, 89, 0.12);
+    color: var(--color-gold);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.2);
+}
+
+@media (max-width: 480px) {
+    .variants-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+

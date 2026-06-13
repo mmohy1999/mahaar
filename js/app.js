@@ -258,87 +258,20 @@ const menuItems = [
             desc: ""
         }
     },
-    {
-        id: "tj5",
-        category: "tajines",
-        price: 220,
-        en: {
-            name: "Eel Tajine",
-            desc: ""
-        },
-        ar: {
-            name: "طاجن تعبان",
-            desc: ""
-        }
-    },
-
-    /*
-    // --- Meals ---
-    {
-        id: "ml1",
-        category: "meals",
-        price: 180,
-        en: {
-            name: "Mahaar Super Platter Meal",
-            desc: "A satisfying platter of grilled fish fillet, fried shrimp, calamari, served with Sayadia rice, seafood soup, and salad."
-        },
-        ar: {
-            name: "وجبة طبق محار سوبر",
-            desc: "وجبة متكاملة من فيليه السمك المشوي، الجمبري المقلي، والسبيط، تقدم مع أرز صيادية، شوربة سي فود، وسلطات."
-        }
-    },
-    {
-        id: "ml2",
-        category: "meals",
-        price: 130,
-        en: {
-            name: "Crispy Shrimp Meal",
-            desc: "Golden crispy fried shrimp served with seasoned Sayadia rice, french fries, and garlic dip."
-        },
-        ar: {
-            name: "وجبة جمبري مقرمش",
-            desc: "جمبري مقلي مقرمش ذهبي اللون يقدم مع أرز صيادية متبل، بطاطس مقلية، وتومية."
-        }
-    },
-    */
-
     // --- Soups ---
     {
         id: "sp1",
         category: "soups",
-        price: 45,
-        en: {
-            name: "Plain Shrimp Soup",
-            desc: ""
-        },
-        ar: {
-            name: "شوربة جمبري ساده",
-            desc: ""
-        }
-    },
-    {
-        id: "sp2",
-        category: "soups",
-        price: 195,
+        variants: [
+            { id: "small", en: "Small", ar: "صغير", price: 100 },
+            { id: "big", en: "Big", ar: "كبير", price: 150 }
+        ],
         en: {
             name: "Creamy Seafood Soup",
             desc: ""
         },
         ar: {
-            name: "شوربة سي فوود كريمي",
-            desc: ""
-        }
-    },
-    {
-        id: "sp3",
-        category: "soups",
-        price: 200,
-        en: {
-            name: "Creamy Boneless Seafood Soup",
-            desc: ""
-        },
-        ar: {
-            name: "شوربة سي فوود كريمي مخليه",
+            name: "شوربة سي فود كريمي",
             desc: ""
         }
     },
@@ -622,13 +555,17 @@ function renderMenu() {
             const itemRow = document.createElement('article');
             itemRow.className = 'menu-item-row';
 
+            const priceDisplay = item.variants
+                ? `${item.variants[0].price} / ${item.variants[1].price} ${translations[currentLanguage]['currency']}`
+                : `${item.price} ${translations[currentLanguage]['currency']}`;
+
             itemRow.innerHTML = `
                 <div class="item-header">
                     <div class="item-name-wrap">
                         <h3 class="item-name">${itemLang.name}</h3>
                     </div>
                     <div class="item-dots"></div>
-                    <span class="item-price">${item.price} ${translations[currentLanguage]['currency']}</span>
+                    <span class="item-price">${priceDisplay}</span>
                 </div>
                 <div class="item-body">
                     <div class="item-text-area">
@@ -647,7 +584,12 @@ function renderMenu() {
                 // If user clicked the button or inside it, add directly to plate
                 if (e.target.closest('.btn-item-add')) {
                     const itemId = e.target.closest('.btn-item-add').getAttribute('data-id');
-                    addToPlate(itemId);
+                    const targetItem = menuItems.find(m => m.id === itemId);
+                    if (targetItem.variants) {
+                        openItemModal(targetItem);
+                    } else {
+                        addToPlate(itemId);
+                    }
                 } else {
                     // Otherwise open beautiful detail modal
                     openItemModal(item);
@@ -667,17 +609,80 @@ function renderMenu() {
 function openItemModal(item) {
     const itemLang = item[currentLanguage];
     const catMeta = categoriesData[item.category];
+    const isAr = currentLanguage === 'ar';
 
     // Set category cover photo as the background decoration of the modal pane
     modalImageBg.style.backgroundImage = `url('${catMeta.image}')`;
 
     modalItemTitle.textContent = itemLang.name;
-    modalItemPrice.textContent = `${item.price} ${translations[currentLanguage]['currency']}`;
     modalItemDesc.textContent = itemLang.desc;
+
+    // Remove any existing variants section
+    const existingVariants = itemModal.querySelector('.modal-variants-section');
+    if (existingVariants) existingVariants.remove();
+
+    if (item.variants) {
+        // Set price text to the first variant initially
+        modalItemPrice.textContent = `${item.variants[0].price} ${translations[currentLanguage]['currency']}`;
+
+        // Create variants container
+        const variantsSection = document.createElement('div');
+        variantsSection.className = 'modal-variants-section';
+
+        const title = document.createElement('h4');
+        title.className = 'variants-title';
+        title.textContent = isAr ? 'اختر الحجم:' : 'Select Size:';
+        variantsSection.appendChild(title);
+
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'variants-options';
+
+        item.variants.forEach((v, index) => {
+            const label = document.createElement('label');
+            label.className = `variant-option ${index === 0 ? 'active' : ''}`;
+
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'item-variant';
+            radio.value = v.id;
+            radio.checked = index === 0;
+
+            // Update price in modal header when selected
+            radio.addEventListener('change', () => {
+                // Remove active class from all options
+                variantsSection.querySelectorAll('.variant-option').forEach(opt => opt.classList.remove('active'));
+                label.classList.add('active');
+                modalItemPrice.textContent = `${v.price} ${translations[currentLanguage]['currency']}`;
+            });
+
+            label.appendChild(radio);
+
+            const spanText = document.createElement('span');
+            spanText.className = 'variant-label-text';
+            spanText.textContent = isAr ? `${v.ar} (${v.price} ج.م)` : `${v.en} (${v.price} EGP)`;
+            label.appendChild(spanText);
+
+            optionsDiv.appendChild(label);
+        });
+
+        variantsSection.appendChild(optionsDiv);
+
+        // Insert variantsSection right before modal-action-row
+        const actionRow = itemModal.querySelector('.modal-action-row');
+        actionRow.parentNode.insertBefore(variantsSection, actionRow);
+    } else {
+        modalItemPrice.textContent = `${item.price} ${translations[currentLanguage]['currency']}`;
+    }
 
     // Bind Add to Plate action
     modalAddToPlateBtn.onclick = () => {
-        addToPlate(item.id);
+        if (item.variants) {
+            const checkedRadio = itemModal.querySelector('input[name="item-variant"]:checked');
+            const selectedVariant = checkedRadio ? checkedRadio.value : item.variants[0].id;
+            addToPlate(item.id, selectedVariant);
+        } else {
+            addToPlate(item.id);
+        }
         closeItemModal();
     };
 
@@ -690,12 +695,12 @@ function closeItemModal() {
 }
 
 // Add Item to Plate Selection
-function addToPlate(itemId) {
-    const existing = selectedItems.find(i => i.id === itemId);
+function addToPlate(itemId, variantId = null) {
+    const existing = selectedItems.find(i => i.id === itemId && i.variant === variantId);
     if (existing) {
         existing.quantity += 1;
     } else {
-        selectedItems.push({ id: itemId, quantity: 1 });
+        selectedItems.push({ id: itemId, variant: variantId, quantity: 1 });
     }
 
     saveTrayState();
@@ -740,7 +745,18 @@ function updateDrawer() {
             if (!item) return;
 
             const itemLang = item[currentLanguage];
-            const itemCost = item.price * selected.quantity;
+            let itemPrice = item.price;
+            let displayName = itemLang.name;
+
+            if (selected.variant && item.variants) {
+                const variant = item.variants.find(v => v.id === selected.variant);
+                if (variant) {
+                    itemPrice = variant.price;
+                    displayName += ` (${currentLanguage === 'ar' ? variant.ar : variant.en})`;
+                }
+            }
+
+            const itemCost = itemPrice * selected.quantity;
             subtotal += itemCost;
 
             // Find category image
@@ -749,23 +765,23 @@ function updateDrawer() {
             const itemRow = document.createElement('div');
             itemRow.className = 'drawer-item';
             itemRow.innerHTML = `
-                <img src="${catMeta.image}" alt="${itemLang.name}" class="drawer-item-img">
+                <img src="${catMeta.image}" alt="${displayName}" class="drawer-item-img">
                 <div class="drawer-item-detail">
-                    <h4>${itemLang.name}</h4>
-                    <span class="drawer-item-price">${item.price} ${translations[currentLanguage]['currency']}</span>
+                    <h4>${displayName}</h4>
+                    <span class="drawer-item-price">${itemPrice} ${translations[currentLanguage]['currency']}</span>
                 </div>
                 <div class="drawer-item-quantity-controls">
-                    <button class="drawer-qty-btn decrease" data-id="${item.id}">-</button>
+                    <button class="drawer-qty-btn decrease">-</button>
                     <span class="drawer-qty-num">${selected.quantity}</span>
-                    <button class="drawer-qty-btn increase" data-id="${item.id}">+</button>
+                    <button class="drawer-qty-btn increase">+</button>
                 </div>
-                <button class="drawer-item-remove-btn" data-id="${item.id}" aria-label="Remove item">&times;</button>
+                <button class="drawer-item-remove-btn" aria-label="Remove item">&times;</button>
             `;
 
             // Wire row control actions
-            itemRow.querySelector('.decrease').onclick = () => adjustQuantity(item.id, -1);
-            itemRow.querySelector('.increase').onclick = () => adjustQuantity(item.id, 1);
-            itemRow.querySelector('.drawer-item-remove-btn').onclick = () => removeSelected(item.id);
+            itemRow.querySelector('.decrease').onclick = () => adjustQuantity(item.id, selected.variant, -1);
+            itemRow.querySelector('.increase').onclick = () => adjustQuantity(item.id, selected.variant, 1);
+            itemRow.querySelector('.drawer-item-remove-btn').onclick = () => removeSelected(item.id, selected.variant);
 
             drawerItemsList.appendChild(itemRow);
         });
@@ -775,13 +791,13 @@ function updateDrawer() {
 }
 
 // Adjust quantity
-function adjustQuantity(itemId, amount) {
-    const item = selectedItems.find(i => i.id === itemId);
+function adjustQuantity(itemId, variantId, amount) {
+    const item = selectedItems.find(i => i.id === itemId && i.variant === variantId);
     if (!item) return;
 
     item.quantity += amount;
     if (item.quantity <= 0) {
-        removeSelected(itemId);
+        removeSelected(itemId, variantId);
     } else {
         saveTrayState();
         updateTrayUI();
@@ -789,8 +805,8 @@ function adjustQuantity(itemId, amount) {
 }
 
 // Remove item
-function removeSelected(itemId) {
-    selectedItems = selectedItems.filter(i => i.id !== itemId);
+function removeSelected(itemId, variantId) {
+    selectedItems = selectedItems.filter(i => !(i.id === itemId && i.variant === variantId));
     saveTrayState();
     updateTrayUI();
 }
@@ -911,17 +927,29 @@ function setupEventListeners() {
         selectedItems.forEach(selected => {
             const item = menuItems.find(m => m.id === selected.id);
             if (!item) return;
+            
             const itemLang = item[currentLanguage];
-            const cost = item.price * selected.quantity;
+            let itemPrice = item.price;
+            let displayName = itemLang.name;
+
+            if (selected.variant && item.variants) {
+                const variant = item.variants.find(v => v.id === selected.variant);
+                if (variant) {
+                    itemPrice = variant.price;
+                    displayName += ` (${currentLanguage === 'ar' ? variant.ar : variant.en})`;
+                }
+            }
+
+            const cost = itemPrice * selected.quantity;
             totalCost += cost;
             
             if (isAr) {
-                orderText += `🔹 *${itemLang.name}*\n`;
-                orderText += `   *الكمية:* ${selected.quantity} ✖️ ${item.price} ج.م\n`;
+                orderText += `🔹 *${displayName}*\n`;
+                orderText += `   *الكمية:* ${selected.quantity} ✖️ ${itemPrice} ج.م\n`;
                 orderText += `   *الحساب:* ${cost} ج.م\n\n`;
             } else {
-                orderText += `🔹 *${itemLang.name}*\n`;
-                orderText += `   *Qty:* ${selected.quantity} ✖️ ${item.price} EGP\n`;
+                orderText += `🔹 *${displayName}*\n`;
+                orderText += `   *Qty:* ${selected.quantity} ✖️ ${itemPrice} EGP\n`;
                 orderText += `   *Price:* ${cost} EGP\n\n`;
             }
         });
