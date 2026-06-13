@@ -892,7 +892,20 @@ function setupEventListeners() {
     orderSubmitBtn.addEventListener('click', () => {
         if (selectedItems.length === 0) return;
 
-        let orderText = `${translations[currentLanguage]['whatsapp-hello']}\n\n`;
+        const isAr = currentLanguage === 'ar';
+        const separator = '━━━━━━━━━━━━━━━━━━━━━━━━━';
+        
+        let orderText = '';
+        if (isAr) {
+            orderText += `*🌊 مطعم محار للمأكولات البحرية 🌊*\n`;
+            orderText += `${separator}\n`;
+            orderText += `*📋 طلب جديد من قائمة الطعام الرقمية:*\n\n`;
+        } else {
+            orderText += `*🌊 MAHAAR SEAFOOD RESTAURANT 🌊*\n`;
+            orderText += `${separator}\n`;
+            orderText += `*📋 New Order from the Digital Menu:*\n\n`;
+        }
+
         let totalCost = 0;
 
         selectedItems.forEach(selected => {
@@ -901,11 +914,28 @@ function setupEventListeners() {
             const itemLang = item[currentLanguage];
             const cost = item.price * selected.quantity;
             totalCost += cost;
-            orderText += `• ${selected.quantity}x ${itemLang.name} (${cost} ${translations[currentLanguage]['currency']})\n`;
+            
+            if (isAr) {
+                orderText += `🔹 *${itemLang.name}*\n`;
+                orderText += `   *الكمية:* ${selected.quantity} ✖️ ${item.price} ج.م\n`;
+                orderText += `   *الحساب:* ${cost} ج.م\n\n`;
+            } else {
+                orderText += `🔹 *${itemLang.name}*\n`;
+                orderText += `   *Qty:* ${selected.quantity} ✖️ ${item.price} EGP\n`;
+                orderText += `   *Price:* ${cost} EGP\n\n`;
+            }
         });
 
-        orderText += `\n${translations[currentLanguage]['whatsapp-total']}: ${totalCost} ${translations[currentLanguage]['currency']}\n`;
-        orderText += `\n${translations[currentLanguage]['whatsapp-thanks']}`;
+        orderText += `${separator}\n`;
+        if (isAr) {
+            orderText += `💰 *المجموع الكلي: ${totalCost} ج.م*\n`;
+            orderText += `${separator}\n\n`;
+            orderText += `*🙏 شكراً جزيلاً لاختياركم مطعم محار!*`;
+        } else {
+            orderText += `💰 *Total Amount: ${totalCost} EGP*\n`;
+            orderText += `${separator}\n\n`;
+            orderText += `*🙏 Thank you for choosing Mahaar Seafood!*`;
+        }
 
         // Encode and dispatch to wa.me link
         const encodedText = encodeURIComponent(orderText);
