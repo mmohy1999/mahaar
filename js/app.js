@@ -121,7 +121,7 @@ const categoriesData = {
             desc: "سلطات خضراء طازجة مزينة بثمار البحر الشهية."
         }
     },
-    
+
     "rice-pasta": {
         image: "images/rice_pasta.png",
         en: {
@@ -410,7 +410,7 @@ const menuItems = [
         }
     },
 
-    
+
     // --- Rice & Pasta ---
     {
         id: "rp1",
@@ -490,7 +490,7 @@ const menuItems = [
             desc: ""
         }
     }
-    
+
 ];
 
 // 4. Application State
@@ -910,7 +910,7 @@ function setupEventListeners() {
         // Encode and dispatch to wa.me link
         const encodedText = encodeURIComponent(orderText);
         // Restaurant WhatsApp placeholder number
-        const whatsappUrl = `https://wa.me/966501234567?text=${encodedText}`;
+        const whatsappUrl = `https://wa.me/+201028346855?text=${encodedText}`;
         window.open(whatsappUrl, '_blank');
     });
 }
