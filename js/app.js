@@ -187,7 +187,7 @@ const menuItems = [
             desc: ""
         },
         ar: {
-            name: "سندوتش ميكس محار",
+            name: "سندوتش مكس محار",
             desc: ""
         }
     },
