@@ -225,6 +225,17 @@ const menuItems = [
         id: "tj1",
         category: "tajines",
         price: 210,
+        optionGroups: [
+            {
+                id: "sauce",
+                en: "Sauce",
+                ar: "الصوص",
+                options: [
+                    { id: "red", en: "Red Sauce", ar: "ريد صوص" },
+                    { id: "white", en: "White Sauce", ar: "وايت صوص" }
+                ]
+            }
+        ],
         en: {
             name: "Shrimp Tajine",
             desc: ""
@@ -238,6 +249,17 @@ const menuItems = [
         id: "tj2",
         category: "tajines",
         price: 230,
+        optionGroups: [
+            {
+                id: "sauce",
+                en: "Sauce",
+                ar: "الصوص",
+                options: [
+                    { id: "red", en: "Red Sauce", ar: "ريد صوص" },
+                    { id: "white", en: "White Sauce", ar: "وايت صوص" }
+                ]
+            }
+        ],
         en: {
             name: "Calamari Tajine",
             desc: ""
@@ -251,6 +273,17 @@ const menuItems = [
         id: "tj3",
         category: "tajines",
         price: 275,
+        optionGroups: [
+            {
+                id: "sauce",
+                en: "Sauce",
+                ar: "الصوص",
+                options: [
+                    { id: "red", en: "Red Sauce", ar: "ريد صوص" },
+                    { id: "white", en: "White Sauce", ar: "وايت صوص" }
+                ]
+            }
+        ],
         en: {
             name: "Mahaar Mix Tajine",
             desc: ""
@@ -264,6 +297,17 @@ const menuItems = [
         id: "tj4",
         category: "tajines",
         price: 350,
+        optionGroups: [
+            {
+                id: "sauce",
+                en: "Sauce",
+                ar: "الصوص",
+                options: [
+                    { id: "red", en: "Red Sauce", ar: "ريد صوص" },
+                    { id: "white", en: "White Sauce", ar: "وايت صوص" }
+                ]
+            }
+        ],
         en: {
             name: "Mix Seafood Tajine",
             desc: ""
@@ -459,6 +503,19 @@ const menuItems = [
         category: "weights",
         price: null,
         isDailyPrice: true,
+        optionGroups: [
+            {
+                id: "weight",
+                en: "Weight",
+                ar: "الوزن",
+                options: [
+                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
+                    { id: "1", en: "1K", ar: "1ك" }
+                ]
+            }
+        ],
         en: {
             name: "Grilled Shrimp",
             desc: ""
@@ -473,6 +530,19 @@ const menuItems = [
         category: "weights",
         price: null,
         isDailyPrice: true,
+        optionGroups: [
+            {
+                id: "weight",
+                en: "Weight",
+                ar: "الوزن",
+                options: [
+                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
+                    { id: "1", en: "1K", ar: "1ك" }
+                ]
+            }
+        ],
         en: {
             name: "Grilled Calamari",
             desc: ""
@@ -487,6 +557,19 @@ const menuItems = [
         category: "weights",
         price: null,
         isDailyPrice: true,
+        optionGroups: [
+            {
+                id: "weight",
+                en: "Weight",
+                ar: "الوزن",
+                options: [
+                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
+                    { id: "1", en: "1K", ar: "1ك" }
+                ]
+            }
+        ],
         en: {
             name: "Grilled Fillet",
             desc: ""
@@ -501,6 +584,19 @@ const menuItems = [
         category: "weights",
         price: null,
         isDailyPrice: true,
+        optionGroups: [
+            {
+                id: "weight",
+                en: "Weight",
+                ar: "الوزن",
+                options: [
+                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
+                    { id: "1", en: "1K", ar: "1ك" }
+                ]
+            }
+        ],
         en: {
             name: "Oysters",
             desc: ""
@@ -644,11 +740,11 @@ function renderMenu() {
             let priceDisplay = '';
             if (item.isDailyPrice) {
                 priceDisplay = translations[currentLanguage]['daily-price'];
+            } else if (item.price !== undefined && item.price !== null) {
+                priceDisplay = `${item.price} ${translations[currentLanguage]['currency']}`;
             } else if (item.optionGroups) {
                 const mainGroup = item.optionGroups[0];
                 priceDisplay = `${mainGroup.options[0].price} / ${mainGroup.options[1].price} ${translations[currentLanguage]['currency']}`;
-            } else {
-                priceDisplay = `${item.price} ${translations[currentLanguage]['currency']}`;
             }
 
             itemRow.innerHTML = `
@@ -719,7 +815,11 @@ function openItemModal(item) {
 
         // We'll calculate total price from selections
         const updateModalPrice = () => {
-            let total = 0;
+            if (item.isDailyPrice) {
+                modalItemPrice.textContent = translations[currentLanguage]['daily-price'];
+                return;
+            }
+            let total = item.price || 0;
             item.optionGroups.forEach(group => {
                 const selectedVal = selectedOpts[group.id];
                 const optObj = group.options.find(o => o.id === selectedVal);
@@ -883,7 +983,7 @@ function updateDrawer() {
             }
 
             if (selected.options && item.optionGroups) {
-                let calculatedPrice = 0;
+                let calculatedPrice = item.price || 0;
                 const suffixes = [];
                 const sep = currentLanguage === 'ar' ? '، ' : ', ';
 
@@ -1117,7 +1217,7 @@ function setupEventListeners() {
             }
 
             if (selected.options && item.optionGroups) {
-                let calculatedPrice = 0;
+                let calculatedPrice = item.price || 0;
                 const suffixes = [];
                 const sep = currentLanguage === 'ar' ? '، ' : ', ';
 
