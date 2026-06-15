@@ -14,6 +14,7 @@ const translations = {
         "cat-all": "All Dishes",
         "cat-sandwiches": "Sandwiches",
         "cat-tajines": "Tajines",
+        "cat-weights": "By Weight",
         "cat-meals": "Meals",
         "cat-soups": "Soups",
         "cat-salads": "Salads",
@@ -26,6 +27,7 @@ const translations = {
         "order-via-whatsapp": "Send Order via WhatsApp",
         "clear-all": "Clear All Selection",
         "currency": "EGP",
+        "daily-price": "Daily Price",
         "added-toast": "Added to your plate!",
         "whatsapp-hello": "Hello Mahaar Seafood! I would like to order the following from your digital menu:",
         "whatsapp-total": "Total",
@@ -42,6 +44,7 @@ const translations = {
         "cat-all": "كل الأطباق",
         "cat-sandwiches": "سندوتشات",
         "cat-tajines": "طواجن",
+        "cat-weights": "الاوزان",
         "cat-meals": "وجبات",
         "cat-soups": "شوربه",
         "cat-salads": "سلطات",
@@ -54,6 +57,7 @@ const translations = {
         "order-via-whatsapp": "إرسال الطلب عبر الواتساب",
         "clear-all": "مسح خياراتي",
         "currency": "ج.م",
+        "daily-price": "السعر حسب اليوم",
         "added-toast": "تمت الإضافة لطبقك!",
         "whatsapp-hello": "مرحباً مطعم محار! أود طلب المأكولات التالية من قائمة الطعام الرقمية:",
         "whatsapp-total": "المجموع الكلي",
@@ -84,6 +88,17 @@ const categoriesData = {
         ar: {
             title: "طواجن",
             desc: "طواجن سي فود غنية ومخبوزة في الفرن."
+        }
+    },
+    weights: {
+        image: "images/weights.png",
+        en: {
+            title: "By Weight",
+            desc: "Fresh ocean catch cooked to your preference by weight."
+        },
+        ar: {
+            title: "الاوزان",
+            desc: "فواكه البحر الطازجة تحضر وتطهى بالوزن حسب اختيارك."
         }
     },
     /*
@@ -262,16 +277,32 @@ const menuItems = [
     {
         id: "sp1",
         category: "soups",
-        variants: [
-            { id: "small", en: "Small", ar: "صغير", price: 100 },
-            { id: "big", en: "Big", ar: "كبير", price: 150 }
+        optionGroups: [
+            {
+                id: "size",
+                en: "Size",
+                ar: "الحجم",
+                options: [
+                    { id: "small", en: "Small", ar: "صغير", price: 100 },
+                    { id: "big", en: "Big", ar: "كبير", price: 150 }
+                ]
+            },
+            {
+                id: "sauce",
+                en: "Sauce",
+                ar: "الصوص",
+                options: [
+                    { id: "white", en: "White Sauce", ar: "وايت صوص" },
+                    { id: "red", en: "Red Sauce", ar: "ريد صوص" }
+                ]
+            }
         ],
         en: {
-            name: "Creamy Seafood Soup",
+            name: "Mix Seafood & Mahaar Soup",
             desc: ""
         },
         ar: {
-            name: "شوربة سي فود كريمي",
+            name: "شوربة مكس سي فود و محار",
             desc: ""
         }
     },
@@ -422,8 +453,63 @@ const menuItems = [
             name: "باستا وايت صوص بالجمبري",
             desc: ""
         }
+    },
+    {
+        id: "wt1",
+        category: "weights",
+        price: null,
+        isDailyPrice: true,
+        en: {
+            name: "Grilled Shrimp",
+            desc: ""
+        },
+        ar: {
+            name: "جمبري مشوي",
+            desc: ""
+        }
+    },
+    {
+        id: "wt2",
+        category: "weights",
+        price: null,
+        isDailyPrice: true,
+        en: {
+            name: "Grilled Calamari",
+            desc: ""
+        },
+        ar: {
+            name: "سبيط مشوي",
+            desc: ""
+        }
+    },
+    {
+        id: "wt3",
+        category: "weights",
+        price: null,
+        isDailyPrice: true,
+        en: {
+            name: "Grilled Fillet",
+            desc: ""
+        },
+        ar: {
+            name: "فيليه مشوي",
+            desc: ""
+        }
+    },
+    {
+        id: "wt4",
+        category: "weights",
+        price: null,
+        isDailyPrice: true,
+        en: {
+            name: "Oysters",
+            desc: ""
+        },
+        ar: {
+            name: "محار",
+            desc: ""
+        }
     }
-
 ];
 
 // 4. Application State
@@ -555,9 +641,15 @@ function renderMenu() {
             const itemRow = document.createElement('article');
             itemRow.className = 'menu-item-row';
 
-            const priceDisplay = item.variants
-                ? `${item.variants[0].price} / ${item.variants[1].price} ${translations[currentLanguage]['currency']}`
-                : `${item.price} ${translations[currentLanguage]['currency']}`;
+            let priceDisplay = '';
+            if (item.isDailyPrice) {
+                priceDisplay = translations[currentLanguage]['daily-price'];
+            } else if (item.optionGroups) {
+                const mainGroup = item.optionGroups[0];
+                priceDisplay = `${mainGroup.options[0].price} / ${mainGroup.options[1].price} ${translations[currentLanguage]['currency']}`;
+            } else {
+                priceDisplay = `${item.price} ${translations[currentLanguage]['currency']}`;
+            }
 
             itemRow.innerHTML = `
                 <div class="item-header">
@@ -585,7 +677,7 @@ function renderMenu() {
                 if (e.target.closest('.btn-item-add')) {
                     const itemId = e.target.closest('.btn-item-add').getAttribute('data-id');
                     const targetItem = menuItems.find(m => m.id === itemId);
-                    if (targetItem.variants) {
+                    if (targetItem.optionGroups) {
                         openItemModal(targetItem);
                     } else {
                         addToPlate(itemId);
@@ -617,74 +709,103 @@ function openItemModal(item) {
     modalItemTitle.textContent = itemLang.name;
     modalItemDesc.textContent = itemLang.desc;
 
-    // Remove any existing variants section
-    const existingVariants = itemModal.querySelector('.modal-variants-section');
-    if (existingVariants) existingVariants.remove();
+    // Remove any existing option sections
+    const existingOptions = itemModal.querySelectorAll('.modal-variants-section');
+    existingOptions.forEach(sec => sec.remove());
 
-    if (item.variants) {
-        // Set price text to the first variant initially
-        modalItemPrice.textContent = `${item.variants[0].price} ${translations[currentLanguage]['currency']}`;
+    if (item.optionGroups) {
+        // Create an object to track currently selected options
+        const selectedOpts = {};
 
-        // Create variants container
-        const variantsSection = document.createElement('div');
-        variantsSection.className = 'modal-variants-section';
+        // We'll calculate total price from selections
+        const updateModalPrice = () => {
+            let total = 0;
+            item.optionGroups.forEach(group => {
+                const selectedVal = selectedOpts[group.id];
+                const optObj = group.options.find(o => o.id === selectedVal);
+                if (optObj && optObj.price) {
+                    total += optObj.price;
+                }
+            });
+            modalItemPrice.textContent = `${total} ${translations[currentLanguage]['currency']}`;
+        };
 
-        const title = document.createElement('h4');
-        title.className = 'variants-title';
-        title.textContent = isAr ? 'اختر الحجم:' : 'Select Size:';
-        variantsSection.appendChild(title);
+        item.optionGroups.forEach(group => {
+            // Set initial selection to the first option in group
+            selectedOpts[group.id] = group.options[0].id;
 
-        const optionsDiv = document.createElement('div');
-        optionsDiv.className = 'variants-options';
+            const groupSection = document.createElement('div');
+            groupSection.className = 'modal-variants-section';
 
-        item.variants.forEach((v, index) => {
-            const label = document.createElement('label');
-            label.className = `variant-option ${index === 0 ? 'active' : ''}`;
+            const title = document.createElement('h4');
+            title.className = 'variants-title';
+            const groupTitle = isAr ? group.ar : group.en;
+            title.textContent = `${groupTitle}:`;
+            groupSection.appendChild(title);
 
-            const radio = document.createElement('input');
-            radio.type = 'radio';
-            radio.name = 'item-variant';
-            radio.value = v.id;
-            radio.checked = index === 0;
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'variants-options';
 
-            // Update price in modal header when selected
-            radio.addEventListener('change', () => {
-                // Remove active class from all options
-                variantsSection.querySelectorAll('.variant-option').forEach(opt => opt.classList.remove('active'));
-                label.classList.add('active');
-                modalItemPrice.textContent = `${v.price} ${translations[currentLanguage]['currency']}`;
+            group.options.forEach((opt, index) => {
+                const label = document.createElement('label');
+                label.className = `variant-option ${index === 0 ? 'active' : ''}`;
+
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = `item-option-${group.id}`;
+                radio.value = opt.id;
+                radio.checked = index === 0;
+
+                radio.addEventListener('change', () => {
+                    groupSection.querySelectorAll('.variant-option').forEach(o => o.classList.remove('active'));
+                    label.classList.add('active');
+                    selectedOpts[group.id] = opt.id;
+                    updateModalPrice();
+                });
+
+                label.appendChild(radio);
+
+                const spanText = document.createElement('span');
+                spanText.className = 'variant-label-text';
+
+                // Show price next to option only if it has a price (like size)
+                let optLabel = isAr ? opt.ar : opt.en;
+                if (opt.price) {
+                    optLabel += isAr ? ` (${opt.price} ج.م)` : ` (${opt.price} EGP)`;
+                }
+                spanText.textContent = optLabel;
+                label.appendChild(spanText);
+
+                optionsDiv.appendChild(label);
             });
 
-            label.appendChild(radio);
+            groupSection.appendChild(optionsDiv);
 
-            const spanText = document.createElement('span');
-            spanText.className = 'variant-label-text';
-            spanText.textContent = isAr ? `${v.ar} (${v.price} ج.م)` : `${v.en} (${v.price} EGP)`;
-            label.appendChild(spanText);
-
-            optionsDiv.appendChild(label);
+            const actionRow = itemModal.querySelector('.modal-action-row');
+            actionRow.parentNode.insertBefore(groupSection, actionRow);
         });
 
-        variantsSection.appendChild(optionsDiv);
+        // Set initial total price
+        updateModalPrice();
 
-        // Insert variantsSection right before modal-action-row
-        const actionRow = itemModal.querySelector('.modal-action-row');
-        actionRow.parentNode.insertBefore(variantsSection, actionRow);
+        // Bind Add to Plate action
+        modalAddToPlateBtn.onclick = () => {
+            addToPlate(item.id, { ...selectedOpts });
+            closeItemModal();
+        };
+
     } else {
-        modalItemPrice.textContent = `${item.price} ${translations[currentLanguage]['currency']}`;
-    }
-
-    // Bind Add to Plate action
-    modalAddToPlateBtn.onclick = () => {
-        if (item.variants) {
-            const checkedRadio = itemModal.querySelector('input[name="item-variant"]:checked');
-            const selectedVariant = checkedRadio ? checkedRadio.value : item.variants[0].id;
-            addToPlate(item.id, selectedVariant);
+        if (item.isDailyPrice) {
+            modalItemPrice.textContent = translations[currentLanguage]['daily-price'];
         } else {
-            addToPlate(item.id);
+            modalItemPrice.textContent = `${item.price} ${translations[currentLanguage]['currency']}`;
         }
-        closeItemModal();
-    };
+
+        modalAddToPlateBtn.onclick = () => {
+            addToPlate(item.id);
+            closeItemModal();
+        };
+    }
 
     itemModal.classList.add('active');
 }
@@ -695,12 +816,19 @@ function closeItemModal() {
 }
 
 // Add Item to Plate Selection
-function addToPlate(itemId, variantId = null) {
-    const existing = selectedItems.find(i => i.id === itemId && i.variant === variantId);
+function addToPlate(itemId, options = null) {
+    const existing = selectedItems.find(i => {
+        if (i.id !== itemId) return false;
+        const keys1 = Object.keys(i.options || {});
+        const keys2 = Object.keys(options || {});
+        if (keys1.length !== keys2.length) return false;
+        return keys1.every(k => i.options[k] === options[k]);
+    });
+
     if (existing) {
         existing.quantity += 1;
     } else {
-        selectedItems.push({ id: itemId, variant: variantId, quantity: 1 });
+        selectedItems.push({ id: itemId, options: options, quantity: 1 });
     }
 
     saveTrayState();
@@ -739,6 +867,7 @@ function updateDrawer() {
         drawerItemsList.innerHTML = '';
 
         let subtotal = 0;
+        let hasDailyPriceItems = false;
 
         selectedItems.forEach(selected => {
             const item = menuItems.find(m => m.id === selected.id);
@@ -747,20 +876,48 @@ function updateDrawer() {
             const itemLang = item[currentLanguage];
             let itemPrice = item.price;
             let displayName = itemLang.name;
+            let isDaily = !!item.isDailyPrice;
 
-            if (selected.variant && item.variants) {
-                const variant = item.variants.find(v => v.id === selected.variant);
-                if (variant) {
-                    itemPrice = variant.price;
-                    displayName += ` (${currentLanguage === 'ar' ? variant.ar : variant.en})`;
+            if (isDaily) {
+                hasDailyPriceItems = true;
+            }
+
+            if (selected.options && item.optionGroups) {
+                let calculatedPrice = 0;
+                const suffixes = [];
+                const sep = currentLanguage === 'ar' ? '، ' : ', ';
+
+                item.optionGroups.forEach(group => {
+                    const selectedVal = selected.options[group.id];
+                    const optObj = group.options.find(o => o.id === selectedVal);
+                    if (optObj) {
+                        if (optObj.price) {
+                            calculatedPrice += optObj.price;
+                        }
+                        suffixes.push(currentLanguage === 'ar' ? optObj.ar : optObj.en);
+                    }
+                });
+
+                itemPrice = calculatedPrice;
+                if (suffixes.length > 0) {
+                    displayName += ` (${suffixes.join(sep)})`;
                 }
             }
 
-            const itemCost = itemPrice * selected.quantity;
-            subtotal += itemCost;
+            if (!isDaily) {
+                const itemCost = itemPrice * selected.quantity;
+                subtotal += itemCost;
+            }
 
             // Find category image
             const catMeta = categoriesData[item.category];
+
+            let itemPriceDisplay = '';
+            if (isDaily) {
+                itemPriceDisplay = translations[currentLanguage]['daily-price'];
+            } else {
+                itemPriceDisplay = `${itemPrice} ${translations[currentLanguage]['currency']}`;
+            }
 
             const itemRow = document.createElement('div');
             itemRow.className = 'drawer-item';
@@ -768,7 +925,7 @@ function updateDrawer() {
                 <img src="${catMeta.image}" alt="${displayName}" class="drawer-item-img">
                 <div class="drawer-item-detail">
                     <h4>${displayName}</h4>
-                    <span class="drawer-item-price">${itemPrice} ${translations[currentLanguage]['currency']}</span>
+                    <span class="drawer-item-price">${itemPriceDisplay}</span>
                 </div>
                 <div class="drawer-item-quantity-controls">
                     <button class="drawer-qty-btn decrease">-</button>
@@ -779,25 +936,40 @@ function updateDrawer() {
             `;
 
             // Wire row control actions
-            itemRow.querySelector('.decrease').onclick = () => adjustQuantity(item.id, selected.variant, -1);
-            itemRow.querySelector('.increase').onclick = () => adjustQuantity(item.id, selected.variant, 1);
-            itemRow.querySelector('.drawer-item-remove-btn').onclick = () => removeSelected(item.id, selected.variant);
+            itemRow.querySelector('.decrease').onclick = () => adjustQuantity(item.id, selected.options, -1);
+            itemRow.querySelector('.increase').onclick = () => adjustQuantity(item.id, selected.options, 1);
+            itemRow.querySelector('.drawer-item-remove-btn').onclick = () => removeSelected(item.id, selected.options);
 
             drawerItemsList.appendChild(itemRow);
         });
 
-        drawerTotalPrice.textContent = `${subtotal} ${translations[currentLanguage]['currency']}`;
+        let subtotalDisplay = '';
+        if (subtotal > 0) {
+            subtotalDisplay = `${subtotal} ${translations[currentLanguage]['currency']}`;
+            if (hasDailyPriceItems) {
+                subtotalDisplay += currentLanguage === 'ar' ? ' + السعر حسب اليوم' : ' + Daily Price';
+            }
+        } else {
+            subtotalDisplay = translations[currentLanguage]['daily-price'];
+        }
+        drawerTotalPrice.textContent = subtotalDisplay;
     }
 }
 
 // Adjust quantity
-function adjustQuantity(itemId, variantId, amount) {
-    const item = selectedItems.find(i => i.id === itemId && i.variant === variantId);
+function adjustQuantity(itemId, options, amount) {
+    const item = selectedItems.find(i => {
+        if (i.id !== itemId) return false;
+        const keys1 = Object.keys(i.options || {});
+        const keys2 = Object.keys(options || {});
+        if (keys1.length !== keys2.length) return false;
+        return keys1.every(k => i.options[k] === options[k]);
+    });
     if (!item) return;
 
     item.quantity += amount;
     if (item.quantity <= 0) {
-        removeSelected(itemId, variantId);
+        removeSelected(itemId, options);
     } else {
         saveTrayState();
         updateTrayUI();
@@ -805,8 +977,14 @@ function adjustQuantity(itemId, variantId, amount) {
 }
 
 // Remove item
-function removeSelected(itemId, variantId) {
-    selectedItems = selectedItems.filter(i => !(i.id === itemId && i.variant === variantId));
+function removeSelected(itemId, options) {
+    selectedItems = selectedItems.filter(i => {
+        if (i.id !== itemId) return true;
+        const keys1 = Object.keys(i.options || {});
+        const keys2 = Object.keys(options || {});
+        if (keys1.length !== keys2.length) return true;
+        return !keys1.every(k => i.options[k] === options[k]);
+    });
     saveTrayState();
     updateTrayUI();
 }
@@ -910,7 +1088,7 @@ function setupEventListeners() {
 
         const isAr = currentLanguage === 'ar';
         const separator = '━━━━━━━━━━━━━━━━━━━━━━━━━';
-        
+
         let orderText = '';
         if (isAr) {
             orderText += `*🌊 مطعم محار للمأكولات البحرية 🌊*\n`;
@@ -923,44 +1101,86 @@ function setupEventListeners() {
         }
 
         let totalCost = 0;
+        let hasDailyPrice = false;
 
         selectedItems.forEach(selected => {
             const item = menuItems.find(m => m.id === selected.id);
             if (!item) return;
-            
+
             const itemLang = item[currentLanguage];
             let itemPrice = item.price;
             let displayName = itemLang.name;
+            let isDaily = !!item.isDailyPrice;
 
-            if (selected.variant && item.variants) {
-                const variant = item.variants.find(v => v.id === selected.variant);
-                if (variant) {
-                    itemPrice = variant.price;
-                    displayName += ` (${currentLanguage === 'ar' ? variant.ar : variant.en})`;
+            if (isDaily) {
+                hasDailyPrice = true;
+            }
+
+            if (selected.options && item.optionGroups) {
+                let calculatedPrice = 0;
+                const suffixes = [];
+                const sep = currentLanguage === 'ar' ? '، ' : ', ';
+
+                item.optionGroups.forEach(group => {
+                    const selectedVal = selected.options[group.id];
+                    const optObj = group.options.find(o => o.id === selectedVal);
+                    if (optObj) {
+                        if (optObj.price) {
+                            calculatedPrice += optObj.price;
+                        }
+                        suffixes.push(currentLanguage === 'ar' ? optObj.ar : optObj.en);
+                    }
+                });
+
+                itemPrice = calculatedPrice;
+                if (suffixes.length > 0) {
+                    displayName += ` (${suffixes.join(sep)})`;
                 }
             }
 
-            const cost = itemPrice * selected.quantity;
-            totalCost += cost;
-            
-            if (isAr) {
-                orderText += `🔹 *${displayName}*\n`;
-                orderText += `   *الكمية:* ${selected.quantity} ✖️ ${itemPrice} ج.م\n`;
-                orderText += `   *الحساب:* ${cost} ج.م\n\n`;
+            if (isDaily) {
+                if (isAr) {
+                    orderText += `🔹 *${displayName}*\n`;
+                    orderText += `   *الكمية:* ${selected.quantity}\n`;
+                    orderText += `   *السعر:* ${translations[currentLanguage]['daily-price']}\n\n`;
+                } else {
+                    orderText += `🔹 *${displayName}*\n`;
+                    orderText += `   *Qty:* ${selected.quantity}\n`;
+                    orderText += `   *Price:* ${translations[currentLanguage]['daily-price']}\n\n`;
+                }
             } else {
-                orderText += `🔹 *${displayName}*\n`;
-                orderText += `   *Qty:* ${selected.quantity} ✖️ ${itemPrice} EGP\n`;
-                orderText += `   *Price:* ${cost} EGP\n\n`;
+                const cost = itemPrice * selected.quantity;
+                totalCost += cost;
+
+                if (isAr) {
+                    orderText += `🔹 *${displayName}*\n`;
+                    orderText += `   *الكمية:* ${selected.quantity} ✖️ ${itemPrice} ج.م\n`;
+                    orderText += `   *الحساب:* ${cost} ج.م\n\n`;
+                } else {
+                    orderText += `🔹 *${displayName}*\n`;
+                    orderText += `   *Qty:* ${selected.quantity} ✖️ ${itemPrice} EGP\n`;
+                    orderText += `   *Price:* ${cost} EGP\n\n`;
+                }
             }
         });
 
         orderText += `${separator}\n`;
+        let totalDisplay = '';
+        if (totalCost > 0) {
+            totalDisplay = `${totalCost} ${translations[currentLanguage]['currency']}`;
+            if (hasDailyPrice) {
+                totalDisplay += currentLanguage === 'ar' ? ' + السعر حسب اليوم' : ' + Daily Price';
+            }
+        } else {
+            totalDisplay = translations[currentLanguage]['daily-price'];
+        }
+
         if (isAr) {
-            orderText += `💰 *المجموع الكلي: ${totalCost} ج.م*\n`;
+            orderText += `💰 *المجموع الكلي: ${totalDisplay}*\n`;
             orderText += `${separator}\n\n`;
             orderText += `*🙏 شكراً جزيلاً لاختياركم مطعم محار!*`;
         } else {
-            orderText += `💰 *Total Amount: ${totalCost} EGP*\n`;
+            orderText += `💰 *Total Amount: ${totalDisplay}*\n`;
             orderText += `${separator}\n\n`;
             orderText += `*🙏 Thank you for choosing Mahaar Seafood!*`;
         }
