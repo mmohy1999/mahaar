@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Mahaar Seafood Restaurant - Connect with us on social media, see menu favorites, and find our location.">
+    <title data-i18n="connect-title">Mahaar | Connect & Find Us</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cairo:wght@300;400;600;700;800&family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Background Ocean Accents -->
+    <div class="ocean-bg-effect"></div>
+    <div class="ocean-wave-overlay"></div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Left: Language Switcher -->
+            <div class="header-left">
+                <button class="lang-switch-btn" id="lang-switch-btn" aria-label="Switch Language">
+                    <span class="lang-icon">🌐</span>
+                    <span class="lang-label">العربية</span>
+                </button>
+            </div>
+
+            <!-- Center: Logo and Brand -->
+            <div class="header-center">
+                <div class="logo-area">
+                    <img src="images/logo.png" alt="Mahaar Logo" class="restaurant-logo">
+                    <div class="brand-text">
+                        <span class="brand-name" data-i18n="brand-name">MAHAAR</span>
+                        <span class="brand-sub" data-i18n="brand-sub">SEAFOOD</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Our Menu Button -->
+            <div class="header-right">
+                <a href="index.html" class="nav-link-btn" id="nav-menu-btn" style="text-decoration: none;">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-label" data-i18n="nav-menu">Our Menu</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header Intro -->
+    <div class="menu-intro-container">
+        <div class="menu-intro-content">
+            <h1 class="menu-main-title" data-i18n="connect-title">Connect with Mahaar</h1>
+            <p class="menu-tagline" data-i18n="connect-subtitle">From the Deep Ocean to Your Feed</p>
+            <div class="divider-pearl">
+                <span class="line"></span>
+                <span class="pearl-dot"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="menu-container">
+
+        <!-- Social Media & Contact Section -->
+        <section class="social-section">
+            <div class="menu-likes-intro">
+                <h2 data-i18n="social-heading">Connect With Us</h2>
+                <p data-i18n="social-desc">Follow our pages, view updates, or message us directly.</p>
+            </div>
+
+            <div class="menu-card-row">
+                <!-- Menu Card -->
+                <a href="index.html" class="social-card menu"
+                    style="text-decoration: none;">
+                    <div class="social-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3 data-i18n="nav-menu">Our Menu</h3>
+                        <p class="social-stat-desc" data-i18n="visit-menu"
+                            style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Explore our fresh seafood dishes</p>
+                    </div>
+                    <span class="btn-like">
+                        <span class="like-icon">📖</span>
+                        <span class="btn-like-txt" data-i18n="view-menu">View Menu</span>
+                    </span>
+                </a>
+            </div>
+
+            <div class="social-grid">
+                <!-- Facebook Card -->
+                <a href="https://www.facebook.com/" target="_blank" class="social-card facebook"
+                    style="text-decoration: none;">
+                    <div class="social-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                            <path
+                                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>Facebook</h3>
+                        <p class="social-stat-desc" data-i18n="visit-facebook"
+                            style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Visit our
+                            Facebook page</p>
+                    </div>
+                    <span class="btn-like">
+                        <span class="like-icon">👍</span>
+                        <span class="btn-like-txt" data-i18n="visit-page">Visit Page</span>
+                    </span>
+                </a>
+
+                <!-- Instagram Card -->
+                <a href="https://www.instagram.com/" target="_blank" class="social-card instagram"
+                    style="text-decoration: none;">
+                    <div class="social-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>Instagram</h3>
+                        <p class="social-stat-desc" data-i18n="visit-instagram"
+                            style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Follow our
+                            culinary journey</p>
+                    </div>
+                    <span class="btn-like">
+                        <span class="like-icon">❤️</span>
+                        <span class="btn-like-txt" data-i18n="follow-page">Follow Us</span>
+                    </span>
+                </a>
+
+                <!-- TikTok Card -->
+                <a href="https://vt.tiktok.com/" target="_blank" class="social-card tiktok"
+                    style="text-decoration: none;">
+                    <div class="social-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                            <path
+                                d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.74-3.94-1.72-.11-.1-.22-.21-.3-.32V14.5c.02 1.96-.58 3.96-1.92 5.41-1.63 1.83-4.22 2.65-6.6 2.05-2.22-.53-4.13-2.12-4.89-4.27-.92-2.52-.3-5.56 1.63-7.4 1.54-1.52 3.8-2.14 5.92-1.61V12.9c-1.01-.26-2.14-.07-2.98.54-.91.64-1.39 1.77-1.28 2.88.07.96.65 1.87 1.48 2.33.91.54 2.08.5 2.94-.09.77-.51 1.22-1.4 1.2-2.32V.02h-.94z" />
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>TikTok</h3>
+                        <p class="social-stat-desc" data-i18n="visit-tiktok"
+                            style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Watch our
+                            restaurant videos</p>
+                    </div>
+                    <span class="btn-like">
+                        <span class="like-icon">🎵</span>
+                        <span class="btn-like-txt" data-i18n="watch-page">Watch Videos</span>
+                    </span>
+                </a>
+
+                <!-- WhatsApp Card -->
+                <a href="https://wa.me/+201028346855" target="_blank" class="social-card whatsapp"
+                    style="text-decoration: none;">
+                    <div class="social-icon-wrapper">
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.02L7.55 18.85L4.43 19.65L5.25 16.61L5.06 16.29C4.24 14.98 3.8 13.46 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67ZM8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.37 17.04 14.27C16.97 14.17 16.81 14.1 16.56 13.98C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.48 13.06 14.31 13.31C14.15 13.55 13.67 14.1 13.53 14.27C13.38 14.44 13.24 14.46 13 14.34C12.75 14.22 11.94 13.95 10.98 13.1C10.23 12.44 9.73 11.62 9.58 11.37C9.43 11.12 9.56 10.99 9.69 10.87C9.8 10.76 9.94 10.58 10.06 10.44C10.18 10.3 10.22 10.19 10.3 10.03C10.38 9.86 10.34 9.72 10.28 9.61C10.22 9.5 9.73 8.28 9.53 7.79C9.32 7.31 9.12 7.37 8.96 7.36C8.81 7.35 8.65 7.33 8.53 7.33Z" />
+                        </svg>
+                    </div>
+                    <div class="social-info">
+                        <h3>WhatsApp</h3>
+                        <p class="social-stat-desc" data-i18n="visit-whatsapp"
+                            style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.25rem;">Chat with us
+                            directly</p>
+                    </div>
+                    <span class="btn-like">
+                        <span class="like-icon">💬</span>
+                        <span class="btn-like-txt" data-i18n="chat-page">Send Message</span>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Location & Map Section -->
+        <section class="location-section">
+            <div class="menu-likes-intro">
+                <h2 data-i18n="location-heading">Our Location</h2>
+                <p data-i18n="location-desc">Find us and experience seafood like never before.</p>
+            </div>
+
+            <div class="location-container">
+                <!-- Left: Info Card -->
+                <div class="contact-details-card">
+                    <div class="contact-info-list">
+                        <!-- Address -->
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">📍</div>
+                            <div class="contact-info-text">
+                                <h4 data-i18n="address-title">Our Address</h4>
+                                <p data-i18n="address-text">Al Nasr Sporting Club, El Mahkama Square, Heliopolis, Cairo, Egypt</p>
+                            </div>
+                        </div>
+
+                        <!-- Phone / WhatsApp -->
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">💬</div>
+                            <div class="contact-info-text">
+                                <h4 data-i18n="phone-title">Phone & WhatsApp</h4>
+                                <p><span dir="ltr">+20 102 834 6855</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Opening Hours -->
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">🕒</div>
+                            <div class="contact-info-text">
+                                <h4 data-i18n="hours-title">Opening Hours</h4>
+                                <p data-i18n="hours-text">Everyday: 12:00 PM - 12:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/place/نادي+النصر+الرياضي%E2%80%AD/@30.1049196,31.3285403,17z" target="_blank" class="btn-primary"
+                        style="text-decoration: none; width: 100%;">
+                        <span>📍</span>
+                        <span data-i18n="get-directions">Get Directions</span>
+                    </a>
+                </div>
+
+                <!-- Right: Custom Map Frame -->
+                <div class="map-wrapper">
+                    <!-- Custom dark-filtered Google Maps Iframe -->
+                    <iframe
+                        src="https://maps.google.com/maps?q=30.1049196,31.3285403&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="Mahaar Seafood Location Map">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer info -->
+    <footer class="menu-footer">
+        <div class="footer-divider">
+            <span class="pearl-dot"></span>
+        </div>
+        <p class="footer-text">&copy; <span id="current-year">2026</span> <span data-i18n="footer-copyright">Mahaar
+                Seafood Restaurant. All Rights Reserved.</span></p>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="js/connect.js"></script>
+</body>
+
+</html>

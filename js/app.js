@@ -32,7 +32,9 @@ const translations = {
         "whatsapp-hello": "Hello Mahaar Seafood! I would like to order the following from your digital menu:",
         "whatsapp-total": "Total",
         "whatsapp-thanks": "Thank you!",
-        "footer-copyright": "Mahaar Seafood Restaurant. All Rights Reserved."
+        "footer-copyright": "Mahaar Seafood Restaurant. All Rights Reserved.",
+        "nav-connect": "Find Us & Socials",
+        "nav-menu": "Our Menu"
     },
     ar: {
         "page-title": "مطعم محار | قائمة المأكولات البحرية الرقمية",
@@ -62,7 +64,9 @@ const translations = {
         "whatsapp-hello": "مرحباً مطعم محار! أود طلب المأكولات التالية من قائمة الطعام الرقمية:",
         "whatsapp-total": "المجموع الكلي",
         "whatsapp-thanks": "شكراً جزيلاً!",
-        "footer-copyright": "مطعم محار للمأكولات البحرية. جميع الحقوق محفوظة."
+        "footer-copyright": "مطعم محار للمأكولات البحرية. جميع الحقوق محفوظة.",
+        "nav-connect": "تواصل معنا",
+        "nav-menu": "قائمة الطعام"
     }
 };
 
