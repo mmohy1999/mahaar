@@ -65,7 +65,7 @@ const translations = {
 };
 
 // 2. Application State
-let currentLanguage = localStorage.getItem('mahaar_lang') || 'en';
+let currentLanguage = localStorage.getItem('mahaar_lang') || 'ar';
 
 // 3. DOM Elements
 const langSwitchBtn = document.getElementById('lang-switch-btn');

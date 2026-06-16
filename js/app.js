@@ -717,7 +717,7 @@ const menuItems = [
 ];
 
 // 4. Application State
-let currentLanguage = localStorage.getItem('mahaar_lang') || 'en';
+let currentLanguage = localStorage.getItem('mahaar_lang') || 'ar';
 let currentCategory = 'all';
 let selectedItems = JSON.parse(localStorage.getItem('mahaar_selected')) || [];
 
