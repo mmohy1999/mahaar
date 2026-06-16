@@ -1229,6 +1229,11 @@ html[dir="rtl"] .modal-tag {
         display: none;
     }
 
+    .category-nav-wrapper {
+        justify-content: flex-start;
+        padding: 0 1.5rem;
+    }
+
     .category-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
