@@ -1218,6 +1218,17 @@ html[dir="rtl"] .modal-tag {
         display: none;
     }
 
+    .lang-switch-btn,
+    .nav-link-btn {
+        padding: 8px 12px;
+        gap: 0;
+    }
+
+    .lang-switch-btn .lang-label,
+    .nav-link-btn .nav-label {
+        display: none;
+    }
+
     .category-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;

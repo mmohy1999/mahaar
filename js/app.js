@@ -161,7 +161,18 @@ const menuItems = [
     {
         id: "sd1",
         category: "sandwiches",
-        price: 50,
+        price: null,
+        optionGroups: [
+            {
+                id: "size",
+                en: "Size",
+                ar: "الحجم",
+                options: [
+                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "big", en: "Big", ar: "كبير", price: 90 }
+                ]
+            }
+        ],
         en: {
             name: "Shrimp Sandwich",
             desc: ""
@@ -174,7 +185,18 @@ const menuItems = [
     {
         id: "sd2",
         category: "sandwiches",
-        price: 75,
+        price: null,
+        optionGroups: [
+            {
+                id: "size",
+                en: "Size",
+                ar: "الحجم",
+                options: [
+                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "big", en: "Big", ar: "كبير", price: 90 }
+                ]
+            }
+        ],
         en: {
             name: "Calamari Sandwich",
             desc: ""
@@ -187,7 +209,18 @@ const menuItems = [
     {
         id: "sd3",
         category: "sandwiches",
-        price: 50,
+        price: null,
+        optionGroups: [
+            {
+                id: "size",
+                en: "Size",
+                ar: "الحجم",
+                options: [
+                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "big", en: "Big", ar: "كبير", price: 90 }
+                ]
+            }
+        ],
         en: {
             name: "Fish Fillet Sandwich",
             desc: ""
@@ -200,7 +233,18 @@ const menuItems = [
     {
         id: "sd4",
         category: "sandwiches",
-        price: 120,
+        price: null,
+        optionGroups: [
+            {
+                id: "size",
+                en: "Size",
+                ar: "الحجم",
+                options: [
+                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "big", en: "Big", ar: "كبير", price: 90 }
+                ]
+            }
+        ],
         en: {
             name: "Mahaar Mix Sandwich",
             desc: ""
@@ -228,7 +272,7 @@ const menuItems = [
     {
         id: "tj1",
         category: "tajines",
-        price: 210,
+        price: 220,
         optionGroups: [
             {
                 id: "sauce",
@@ -300,7 +344,7 @@ const menuItems = [
     {
         id: "tj4",
         category: "tajines",
-        price: 350,
+        price: 300,
         optionGroups: [
             {
                 id: "sauce",
@@ -413,11 +457,11 @@ const menuItems = [
         category: "salads",
         price: 20,
         en: {
-            name: "Special Sauce",
+            name: "Special Mahaar Sauce ",
             desc: ""
         },
         ar: {
-            name: "صوص",
+            name: "صوص محار الخاص",
             desc: ""
         }
     },
@@ -427,7 +471,7 @@ const menuItems = [
     {
         id: "rp1",
         category: "rice-pasta",
-        price: 20,
+        price: 30,
         en: {
             name: "Plain Sayadia Rice",
             desc: ""
@@ -440,7 +484,7 @@ const menuItems = [
     {
         id: "rp2",
         category: "rice-pasta",
-        price: 50,
+        price: 100,
         en: {
             name: "Rice with Shrimp",
             desc: ""
@@ -453,7 +497,7 @@ const menuItems = [
     {
         id: "rp3",
         category: "rice-pasta",
-        price: 70,
+        price: 100,
         en: {
             name: "Rice with Calamari",
             desc: ""
@@ -466,7 +510,7 @@ const menuItems = [
     {
         id: "rp4",
         category: "rice-pasta",
-        price: 100,
+        price: 130,
         en: {
             name: "Seafood Mix Rice",
             desc: ""
@@ -492,7 +536,7 @@ const menuItems = [
     {
         id: "rp6",
         category: "rice-pasta",
-        price: 130,
+        price: 140,
         en: {
             name: "White Sauce Pasta with Shrimp",
             desc: ""
@@ -503,56 +547,37 @@ const menuItems = [
         }
     },
     {
-        id: "wt1",
-        category: "weights",
-        price: null,
-        isDailyPrice: true,
-        optionGroups: [
-            {
-                id: "weight",
-                en: "Weight",
-                ar: "الوزن",
-                options: [
-                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
-                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
-                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
-                    { id: "1", en: "1K", ar: "1ك" }
-                ]
-            }
-        ],
-        en: {
-            name: "Grilled Shrimp",
-            desc: ""
-        },
-        ar: {
-            name: "جمبري مشوي",
-            desc: ""
-        }
-    },
-    {
         id: "wt2",
         category: "weights",
         price: null,
-        isDailyPrice: true,
         optionGroups: [
             {
                 id: "weight",
                 en: "Weight",
                 ar: "الوزن",
                 options: [
-                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
-                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
-                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
-                    { id: "1", en: "1K", ar: "1ك" }
+                    { id: "1_8", en: "1/8K", ar: "1/8ك", price: 135 },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك", price: 275 },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك", price: 550 },
+                    { id: "1", en: "1K", ar: "1ك", price: 1100 }
+                ]
+            },
+            {
+                id: "cooking",
+                en: "Preparation Style",
+                ar: "طريقة التحضير",
+                options: [
+                    { id: "grilled", en: "Grilled", ar: "مشوي" },
+                    { id: "fried", en: "Fried", ar: "مقلي" }
                 ]
             }
         ],
         en: {
-            name: "Grilled Calamari",
+            name: "Calamari",
             desc: ""
         },
         ar: {
-            name: "سبيط مشوي",
+            name: "سبيط",
             desc: ""
         }
     },
@@ -560,26 +585,34 @@ const menuItems = [
         id: "wt3",
         category: "weights",
         price: null,
-        isDailyPrice: true,
         optionGroups: [
             {
                 id: "weight",
                 en: "Weight",
                 ar: "الوزن",
                 options: [
-                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
-                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
-                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
-                    { id: "1", en: "1K", ar: "1ك" }
+                    { id: "1_8", en: "1/8K", ar: "1/8ك", price: 85 },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك", price: 175 },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك", price: 350 },
+                    { id: "1", en: "1K", ar: "1ك", price: 700 }
+                ]
+            },
+            {
+                id: "cooking",
+                en: "Preparation Style",
+                ar: "طريقة التحضير",
+                options: [
+                    { id: "grilled", en: "Grilled", ar: "مشوي" },
+                    { id: "fried", en: "Fried", ar: "مقلي" }
                 ]
             }
         ],
         en: {
-            name: "Grilled Fillet",
+            name: "Fillet",
             desc: ""
         },
         ar: {
-            name: "فيليه مشوي",
+            name: "فيليه",
             desc: ""
         }
     },
@@ -587,17 +620,16 @@ const menuItems = [
         id: "wt4",
         category: "weights",
         price: null,
-        isDailyPrice: true,
         optionGroups: [
             {
                 id: "weight",
                 en: "Weight",
                 ar: "الوزن",
                 options: [
-                    { id: "1_8", en: "1/8K ", ar: "1/8ك " },
-                    { id: "1_4", en: "1/4K", ar: "1/4ك" },
-                    { id: "1_2", en: "1/2K", ar: "1/2ك" },
-                    { id: "1", en: "1K", ar: "1ك" }
+                    { id: "1_8", en: "1/8K", ar: "1/8ك", price: 85 },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك", price: 175 },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك", price: 350 },
+                    { id: "1", en: "1K", ar: "1ك", price: 700 }
                 ]
             }
         ],
@@ -607,6 +639,78 @@ const menuItems = [
         },
         ar: {
             name: "محار",
+            desc: ""
+        }
+    },
+    {
+        id: "wt5",
+        category: "weights",
+        price: null,
+        optionGroups: [
+            {
+                id: "weight",
+                en: "Weight",
+                ar: "الوزن",
+                options: [
+                    { id: "1_8", en: "1/8K", ar: "1/8ك", price: 185 },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك", price: 375 },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك", price: 750 },
+                    { id: "1", en: "1K", ar: "1ك", price: 1500 }
+                ]
+            },
+            {
+                id: "cooking",
+                en: "Preparation Style",
+                ar: "طريقة التحضير",
+                options: [
+                    { id: "grilled", en: "Grilled", ar: "مشوي" },
+                    { id: "fried", en: "Fried", ar: "مقلي" },
+                    { id: "butterfly", en: "Butterfly", ar: "باترفلاي" }
+                ]
+            }
+        ],
+        en: {
+            name: "Shrimp Big",
+            desc: ""
+        },
+        ar: {
+            name: "جمبري كبير",
+            desc: ""
+        }
+    },
+    {
+        id: "wt6",
+        category: "weights",
+        price: null,
+        optionGroups: [
+            {
+                id: "weight",
+                en: "Weight",
+                ar: "الوزن",
+                options: [
+                    { id: "1_8", en: "1/8K", ar: "1/8ك", price: 150 },
+                    { id: "1_4", en: "1/4K", ar: "1/4ك", price: 300 },
+                    { id: "1_2", en: "1/2K", ar: "1/2ك", price: 600 },
+                    { id: "1", en: "1K", ar: "1ك", price: 1200 }
+                ]
+            },
+            {
+                id: "cooking",
+                en: "Preparation Style",
+                ar: "طريقة التحضير",
+                options: [
+                    { id: "grilled", en: "Grilled", ar: "مشوي" },
+                    { id: "fried", en: "Fried", ar: "مقلي" },
+                    { id: "butterfly", en: "Butterfly", ar: "باترفلاي" }
+                ]
+            }
+        ],
+        en: {
+            name: "Shrimp Medium",
+            desc: ""
+        },
+        ar: {
+            name: "جمبري وسط",
             desc: ""
         }
     }
@@ -748,7 +852,14 @@ function renderMenu() {
                 priceDisplay = `${item.price} ${translations[currentLanguage]['currency']}`;
             } else if (item.optionGroups) {
                 const mainGroup = item.optionGroups[0];
-                priceDisplay = `${mainGroup.options[0].price} / ${mainGroup.options[1].price} ${translations[currentLanguage]['currency']}`;
+                const prices = mainGroup.options.map(o => o.price).filter(p => p !== undefined && p !== null);
+                if (prices.length > 2) {
+                    priceDisplay = `${prices[0]} - ${prices[prices.length - 1]} ${translations[currentLanguage]['currency']}`;
+                } else if (prices.length === 2) {
+                    priceDisplay = `${prices[0]} / ${prices[1]} ${translations[currentLanguage]['currency']}`;
+                } else if (prices.length === 1) {
+                    priceDisplay = `${prices[0]} ${translations[currentLanguage]['currency']}`;
+                }
             }
 
             itemRow.innerHTML = `
@@ -1292,7 +1403,7 @@ function setupEventListeners() {
         // Encode and dispatch to wa.me link
         const encodedText = encodeURIComponent(orderText);
         // Restaurant WhatsApp placeholder number
-        const whatsappUrl = `https://wa.me/+201028346855?text=${encodedText}`;
+        const whatsappUrl = `https://wa.me/+201287093666?text=${encodedText}`;
         window.open(whatsappUrl, '_blank');
     });
 }

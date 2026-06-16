@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mahaar Seafood Restaurant - Digital Menu. Experience the finest and freshest ocean delicacies.">
+    <meta name="description"
+        content="Mahaar Seafood Restaurant - Digital Menu. Experience the finest and freshest ocean delicacies.">
     <title data-i18n="page-title">Mahaar | Premium Seafood Menu</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cairo:wght@300;400;600;700;800&family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Cairo:wght@300;400;600;700;800&family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <!-- Background Ocean Accents -->
     <div class="ocean-bg-effect"></div>
@@ -33,7 +38,7 @@
                     <span class="nav-label" data-i18n="nav-connect">Find Us & Socials</span>
                 </a>
             </div>
-            
+
             <!-- Center: Logo and Brand -->
             <div class="header-center">
                 <div class="logo-area">
@@ -52,9 +57,9 @@
                         <span class="badge" id="tray-count">0</span>
                         <!-- Clam Shell SVG Icon -->
                         <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s-8-4-8-10a8 8 0 0 1 16 0c0 6-8 10-8 10z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 2v4M4 12h4M16 12h4M12 16v4"/>
+                            <path d="M12 22s-8-4-8-10a8 8 0 0 1 16 0c0 6-8 10-8 10z" />
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M12 2v4M4 12h4M16 12h4M12 16v4" />
                         </svg>
                     </div>
                     <span class="btn-text" data-i18n="my-selection">My Plate</span>
@@ -88,9 +93,7 @@
             <button class="category-tab" data-category="tajines">
                 <span class="tab-text" data-i18n="cat-tajines">Tajines</span>
             </button>
-            <button class="category-tab" data-category="weights">
-                <span class="tab-text" data-i18n="cat-weights">By Weight</span>
-            </button>
+
             <!--
             <button class="category-tab" data-category="meals">
                 <span class="tab-text" data-i18n="cat-meals">Meals</span>
@@ -104,6 +107,9 @@
             </button>
             <button class="category-tab" data-category="rice-pasta">
                 <span class="tab-text" data-i18n="cat-rice-pasta">Rice & Pasta</span>
+            </button>
+            <button class="category-tab" data-category="weights">
+                <span class="tab-text" data-i18n="cat-weights">By Weight</span>
             </button>
         </div>
     </nav>
@@ -120,7 +126,8 @@
         <div class="footer-divider">
             <span class="pearl-dot"></span>
         </div>
-        <p class="footer-text">&copy; <span id="current-year">2026</span> <span data-i18n="footer-copyright">Mahaar Seafood Restaurant. All Rights Reserved.</span></p>
+        <p class="footer-text">&copy; <span id="current-year">2026</span> <span data-i18n="footer-copyright">Mahaar
+                Seafood Restaurant. All Rights Reserved.</span></p>
     </footer>
 
     <!-- Details Modal -->
@@ -138,9 +145,9 @@
                         <span class="modal-item-price" id="modal-item-price">0.00 EGP</span>
                     </div>
                     <div class="section-divider short"></div>
-                    
+
                     <p class="modal-item-desc" id="modal-item-desc">Dish Description goes here.</p>
-                    
+
                     <div class="modal-action-row">
                         <button class="btn-primary" id="modal-add-to-plate-btn">
                             <span data-i18n="add-to-plate">Add to Plate</span>
@@ -158,19 +165,20 @@
                 <h2 data-i18n="my-plate-title">My Selected Dishes</h2>
                 <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close Plate">&times;</button>
             </div>
-            
+
             <div class="drawer-body">
                 <div class="drawer-empty-state" id="drawer-empty-state">
                     <!-- Clam shell visual -->
                     <div class="empty-shell-icon">🐚</div>
-                    <p data-i18n="plate-empty-msg">Your plate is currently empty. Explore our menu and select your favorite ocean delicacies!</p>
+                    <p data-i18n="plate-empty-msg">Your plate is currently empty. Explore our menu and select your
+                        favorite ocean delicacies!</p>
                 </div>
-                
+
                 <div class="drawer-items-list" id="drawer-items-list">
                     <!-- Selected items will render here dynamically -->
                 </div>
             </div>
-            
+
             <div class="drawer-footer" id="drawer-footer">
                 <div class="drawer-summary-row">
                     <span data-i18n="subtotal">Subtotal</span>
@@ -182,7 +190,8 @@
                         <span class="btn-icon">💬</span>
                         <span data-i18n="order-via-whatsapp">Send Order via WhatsApp</span>
                     </button>
-                    <button class="btn-secondary full-width" id="clear-plate-btn" data-i18n="clear-all">Clear All</button>
+                    <button class="btn-secondary full-width" id="clear-plate-btn" data-i18n="clear-all">Clear
+                        All</button>
                 </div>
             </div>
         </div>
@@ -191,4 +200,5 @@
     <!-- Custom JavaScript -->
     <script src="js/app.js"></script>
 </body>
+
 </html>
