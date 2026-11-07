@@ -19,11 +19,13 @@ const translations = {
         "cat-soups": "Soups",
         "cat-salads": "Salads",
         "cat-rice-pasta": "Rice & Pasta",
+        "cat-drinks": "Drinks",
         "add-to-plate": "Add to Plate",
         "my-plate-title": "My Selected Dishes",
         "plate-empty-msg": "Your plate is currently empty. Explore our menu and select your favorite ocean delicacies!",
         "subtotal": "Subtotal",
         "tax-notice": "Prices are inclusive of VAT",
+        "tax-reg": "Tax Registration Number: 774-393-734",
         "order-via-whatsapp": "Send Order via WhatsApp",
         "clear-all": "Clear All Selection",
         "currency": "EGP",
@@ -51,11 +53,13 @@ const translations = {
         "cat-soups": "شوربه",
         "cat-salads": "سلطات",
         "cat-rice-pasta": "رز ومكرونه",
+        "cat-drinks": "مشروبات",
         "add-to-plate": "إضافة إلى طبقي",
         "my-plate-title": "الأطباق التي اخترتها",
         "plate-empty-msg": "طبقك فارغ حالياً. استكشف القائمة واختر ما تشتهيه من روائع البحر!",
         "subtotal": "المجموع الفرعي",
         "tax-notice": "الأسعار تشمل ضريبة القيمة المضافة",
+        "tax-reg": "رقم التسجيل الضريبي : 774-393-734",
         "order-via-whatsapp": "إرسال الطلب عبر الواتساب",
         "clear-all": "مسح خياراتي",
         "currency": "ج.م",
@@ -151,6 +155,17 @@ const categoriesData = {
             title: "رز ومكرونه",
             desc: "أرز الصيادية الكلافيكي ومكرونات ثمار البحر الفاخرة."
         }
+    },
+    drinks: {
+        image: "images/drink.png",
+        en: {
+            title: "Drinks",
+            desc: "Refreshing cold beverages and mineral water."
+        },
+        ar: {
+            title: "مشروبات",
+            desc: "مشروبات باردة ومنعشة ومياه معدنية."
+        }
     }
 
 };
@@ -168,7 +183,7 @@ const menuItems = [
                 en: "Size",
                 ar: "الحجم",
                 options: [
-                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "medium", en: "medium", ar: "وسط", price: 70 },
                     { id: "big", en: "Big", ar: "كبير", price: 90 }
                 ]
             }
@@ -192,7 +207,7 @@ const menuItems = [
                 en: "Size",
                 ar: "الحجم",
                 options: [
-                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "medium", en: "medium", ar: "وسط", price: 70 },
                     { id: "big", en: "Big", ar: "كبير", price: 90 }
                 ]
             }
@@ -216,7 +231,7 @@ const menuItems = [
                 en: "Size",
                 ar: "الحجم",
                 options: [
-                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "medium", en: "medium", ar: "وسط", price: 70 },
                     { id: "big", en: "Big", ar: "كبير", price: 90 }
                 ]
             }
@@ -240,7 +255,7 @@ const menuItems = [
                 en: "Size",
                 ar: "الحجم",
                 options: [
-                    { id: "small", en: "Small", ar: "صغير", price: 70 },
+                    { id: "medium", en: "medium", ar: "وسط", price: 70 },
                     { id: "big", en: "Big", ar: "كبير", price: 90 }
                 ]
             }
@@ -257,7 +272,7 @@ const menuItems = [
     {
         id: "sd5",
         category: "sandwiches",
-        price: 135,
+        price: 150,
         en: {
             name: "Grilled Viagra Sandwich",
             desc: ""
@@ -375,8 +390,8 @@ const menuItems = [
                 en: "Size",
                 ar: "الحجم",
                 options: [
-                    { id: "small", en: "Small", ar: "صغير", price: 100 },
-                    { id: "big", en: "Big", ar: "كبير", price: 150 }
+                    { id: "small", en: "Small", ar: "صغير", price: 150 },
+                    { id: "big", en: "Big", ar: "كبير", price: 200 }
                 ]
             },
             {
@@ -711,6 +726,21 @@ const menuItems = [
         },
         ar: {
             name: "جمبري وسط",
+            desc: ""
+        }
+    },
+
+    // --- Drinks ---
+    {
+        id: "dr1",
+        category: "drinks",
+        price: 10,
+        en: {
+            name: "Water Small",
+            desc: ""
+        },
+        ar: {
+            name: "مياه معدنية صغيرة",
             desc: ""
         }
     }
@@ -1392,11 +1422,13 @@ function setupEventListeners() {
 
         if (isAr) {
             orderText += `💰 *المجموع الكلي: ${totalDisplay}*\n`;
-            orderText += `${separator}\n\n`;
+            orderText += `${separator}\n`;
+            orderText += `*رقم التسجيل الضريبي:* 774-393-734\n\n`;
             orderText += `*🙏 شكراً جزيلاً لاختياركم مطعم محار!*`;
         } else {
             orderText += `💰 *Total Amount: ${totalDisplay}*\n`;
-            orderText += `${separator}\n\n`;
+            orderText += `${separator}\n`;
+            orderText += `*Tax Reg. No:* 774-393-734\n\n`;
             orderText += `*🙏 Thank you for choosing Mahaar Seafood!*`;
         }
 

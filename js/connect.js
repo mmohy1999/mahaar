@@ -26,12 +26,13 @@ const translations = {
         "location-heading": "Our Location",
         "location-desc": "Find us and experience seafood like never before.",
         "address-title": "Our Address",
-        "address-text": "Al Nasr Sporting Club, El Mahkama Square, Heliopolis, Cairo, Egypt",
+        "address-text": "Abbassia Square - Maj. Gen. Adel Abu El Hadid Park, Cairo, Egypt",
         "phone-title": "Phone & WhatsApp",
         "hours-title": "Opening Hours",
         "hours-text": "Everyday: 12:00 PM - 12:00 AM",
         "get-directions": "Get Directions",
-        "footer-copyright": "Mahaar Seafood Restaurant. All Rights Reserved."
+        "footer-copyright": "Mahaar Seafood Restaurant. All Rights Reserved.",
+        "tax-reg": "Tax Registration Number: 774-393-734"
     },
     ar: {
         "page-title": "مطعم محار | تواصل معنا وموقعنا",
@@ -55,12 +56,13 @@ const translations = {
         "location-heading": "موقعنا",
         "location-desc": "تفضل بزيارتنا واستمتع بتجربة مأكولات بحرية لا مثيل لها.",
         "address-title": "عنواننا",
-        "address-text": "نادي النصر الرياضي - ميدان المحكمة، قسم مصر الجديدة، القاهرة، مصر",
+        "address-text": "ميدان العباسية - حديقة اللواء أ.ح عادل أبو الحديد",
         "phone-title": "الهاتف والواتساب",
         "hours-title": "أوقات العمل",
         "hours-text": "يومياً: 12:00 مساءً - 12:00 صباحاً",
         "get-directions": "الحصول على الاتجاهات",
-        "footer-copyright": "مطعم محار للمأكولات البحرية. جميع الحقوق محفوظة."
+        "footer-copyright": "مطعم محار للمأكولات البحرية. جميع الحقوق محفوظة.",
+        "tax-reg": "رقم التسجيل الضريبي : 774-393-734"
     }
 };
 

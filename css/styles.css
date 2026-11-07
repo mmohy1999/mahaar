@@ -702,6 +702,19 @@ html[dir="rtl"] .category-title::after {
     letter-spacing: 0.05em;
 }
 
+.footer-tax-reg {
+    font-size: 0.8rem;
+    color: var(--color-silver-mid);
+    margin-top: 0.4rem;
+    letter-spacing: 0.05em;
+    direction: ltr;
+    display: inline-block;
+}
+
+html[dir="rtl"] .footer-tax-reg {
+    direction: rtl;
+}
+
 /* ==========================================================================
    Selection Drawer
    ========================================================================== */
@@ -923,7 +936,19 @@ html[dir="rtl"] .drawer-content {
 .drawer-tax-notice {
     font-size: 0.75rem;
     color: var(--color-silver-dark);
+    margin-bottom: 0.35rem;
+}
+
+.drawer-tax-reg {
+    font-size: 0.75rem;
+    color: var(--color-silver-mid);
     margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    direction: ltr;
+}
+
+html[dir="rtl"] .drawer-tax-reg {
+    direction: rtl;
 }
 
 .drawer-actions {
